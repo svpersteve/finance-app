@@ -20,6 +20,7 @@ group :development, :test do
   gem 'pry'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
 
 group :development do
