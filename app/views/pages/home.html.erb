@@ -1,0 +1,81 @@
+<table>
+  <tr>
+    <th><h1>Account</h1></th>
+    <th><h1>Amount</h1></th>
+  </tr>
+
+  <%- @balances.each do |balance| %>
+    <%- balance.each do |name, value| %>
+      <tr>
+        <td><%= name %></td>
+        <td><%= number_to_currency value, unit: @unit %></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <tr>
+    <td>Cash Total</td>
+    <td><%= number_to_currency @total_cash, unit: @unit %></td>
+  </tr>
+
+</table>
+<table>
+  <tr>
+    <th><h1></h1></th>
+    <th><h1></h1></th>
+  </tr>
+
+  <tr>
+    <td>Loan 1</td>
+    <td><%= @loan1 %></td>
+  </tr>
+
+  <tr>
+    <td>Loan 2</td>
+    <td><%= @loan2 %></td>
+  </tr>
+
+  <tr>
+    <td>Loans Total</td>
+    <td><%= @loans_total %></td>
+  </tr>
+
+</table>
+<table>
+  <tr>
+    <th><h1></h1></th>
+    <th><h1></h1></th>
+  </tr>
+
+  <tr>
+    <td>Flat</td>
+    <td><%= number_to_currency @flat, unit: @unit %></td>
+  </tr>
+
+  <tr>
+    <td>Mortgage</td>
+    <td><%= number_to_currency @mortgage, unit: @unit %></td>
+  </tr>
+
+  <tr>
+    <td>FirstBuy</td>
+    <td><%= number_to_currency @firstbuy, unit: @unit %></td>
+  </tr>
+
+  <tr>
+    <td>Assets/Liabilities Total</td>
+    <td><%= number_to_currency @assets, unit: @unit %></td>
+  </tr>
+
+</table>
+<table>
+  <tr>
+    <th><h1></h1></th>
+    <th><h1></h1></th>
+  </tr>
+
+  <tr>
+    <td>Total Worth</td>
+    <td><%= number_to_currency @total_worth, unit: @unit %></td>
+  </tr>
+</table>
