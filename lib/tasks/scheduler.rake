@@ -1,6 +1,7 @@
 desc "This task is called by the Heroku scheduler add-on"
 task :update_balances => :environment do
   day_of_month = Time.now.strftime("%d")
+  day_of_week = Time.now.strftime("%A")
 
   # Starling
   starling = Account.find_by(name: 'Starling')
@@ -12,7 +13,7 @@ task :update_balances => :environment do
     # Loan One
     puts 'Updating loan one balance'
     loan_one = Account.find_by(name: 'Loan One')
-    Balance.create(account: loan_one, amount: (loan_one.current_balance + 500))
+    Balance.create(account: loan_one, amount: (loan_one.current_balance + loan_one.monthly_payment))
 
     # Loan Two
     puts 'Updating loan two balance'
@@ -34,8 +35,14 @@ task :update_balances => :environment do
     # Mortgage
     puts 'Updating mortgage balance'
     mortgage = Account.find_by(name: 'Mortgage')
-    mortgage_interest = (mortgage.current_balance * mortgage.interest_rate) /12
+    mortgage_interest = (mortgage.current_balance * mortgage.interest_rate) / 12
     Balance.create(account: mortgage, amount: (mortgage.current_balance + mortgage.monthly_payment - mortgage_interest ))
+  end
+
+  if day_of_week == 'Wednesday'
+    puts 'Updating MoneyBox balance'
+    moneybox = Account.find_by(name: 'MoneyBox')
+    Balance.create(account: moneybox, amount: (moneybox.current_balance + 25 ))
   end
 
   # FirstBuy
