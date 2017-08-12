@@ -1,0 +1,24 @@
+<h1>Accounts</h1>
+
+<h2>Short Term</h2>
+<% @accounts.short_term.each do |account| %>
+  <p><%= link_to account.name, account %>: <%= number_to_currency account.current_balance, unit: '£' %></p>
+<% end %>
+
+<h3>Short term total: <%= number_to_currency total_current_balance(@accounts.short_term), unit: '£' %></h3>
+
+<h2>Long Term</h2>
+<% @accounts.long_term.each do |account| %>
+  <p><%= link_to account.name, account %>: <%= number_to_currency account.current_balance, unit: '£' %></p>
+<% end %>
+
+<h3>Long term total: <%= number_to_currency total_current_balance(@accounts.long_term), unit: '£' %></h3>
+
+<h2>Property</h2>
+<% @accounts.property.each do |account| %>
+  <p><%= link_to account.name, account %>: <%= number_to_currency account.current_balance, unit: '£' %></p>
+<% end %>
+
+<h3>Property value: <%= number_to_currency total_current_balance(@accounts.property), unit: '£' %></h3>
+
+<h2>Net worth: <%= number_to_currency total_current_balance(@accounts), unit: '£' %></h2>

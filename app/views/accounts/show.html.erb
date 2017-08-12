@@ -1,0 +1,6 @@
+<%= @account.name %>
+
+<% @account.balances.order('amount DESC').each do |balance| %>
+  <p><%= balance.created_at.to_date.to_formatted_s(:long_ordinal) %></p>
+  <p><%= number_to_currency(balance.amount, unit: '£') %></p>
+<% end %>
