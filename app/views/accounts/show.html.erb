@@ -1,9 +1,13 @@
 <h1 class="center"><%= @account.name %></h1>
 
+<canvas id="accountHistory"></canvas>
+
+<br>
+
+<h1 class="center">Balance History</h1>
+
 <div class="balances balances--center">
   <div class="balance">
-    <h2 class="balance__top"><%= @account.name %></h2>
-
     <div class="balance__accounts">
       <% @account.balances.in_date_order.each do |balance| %>
         <div class="balance__account">
@@ -18,3 +22,54 @@
     </div>
   </div>
 </div>
+
+<script>
+  var accountHistoryChart = $("#accountHistory");
+
+  var accountHistory = new Chart(accountHistoryChart, {
+      type: 'line',
+      data: {
+          labels: gon.dates,
+
+          datasets: [{
+              label: '£',
+              data: gon.balances,
+              backgroundColor: ['#0D791C'],
+              borderColor: ['#0D791C'],
+              borderWidth: 1,
+              fill: false,
+          }]
+      },
+      options: {
+        responsive: false,
+        title:{
+            display: false,
+            text:'History'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Month'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Value'
+                }
+            }]
+        }
+      }
+  });
+</script>
