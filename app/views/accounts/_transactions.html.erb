@@ -3,14 +3,16 @@
 
   <div class="balance__accounts">
     <% accounts.each do |account| %>
-      <div class="balance__account">
-        <div class="balance__account-name">
-          <%= link_to account.name, account %>
+      <% unless account.current_balance == 0 %>
+        <div class="balance__account">
+          <div class="balance__account-name">
+            <%= link_to account.name, account %>
+          </div>
+          <div class="balance__account-amount <%= red_or_green(account.current_balance) %>">
+            <%= number_to_currency account.current_balance, unit: '£', strip_insignificant_zeros: true %>
+          </div>
         </div>
-        <div class="balance__account-amount <%= red_or_green(account.current_balance) %>">
-          <%= number_to_currency account.current_balance, unit: '£', strip_insignificant_zeros: true %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 
