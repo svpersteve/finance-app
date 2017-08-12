@@ -4,23 +4,18 @@ task :update_balances => :environment do
   day_of_week = Time.now.strftime("%A")
 
   # Starling
-  starling = Account.find_by(name: 'Starling')
-  request = RestClient.get "https://api.starlingbank.com/api/v1/accounts/balance", { authorization: "Bearer #{ENV['STEVE_TOKEN']}" }
-  balance = ActiveSupport::JSON.decode(request)
-  Balance.create(account: starling, amount: balance['effectiveBalance'])
+  if ENV['STARLING_TOKEN']
+    starling = Account.find_by(name: 'Starling')
+    request = RestClient.get "https://api.starlingbank.com/api/v1/accounts/balance", { authorization: "Bearer #{ENV['STARLING_TOKEN']}" }
+    balance = ActiveSupport::JSON.decode(request)
+    Balance.create(account: starling, amount: balance['effectiveBalance'])
+  end
 
   if day_of_month == 28
-    # Loan One
+    # Loan
     puts 'Updating loan one balance'
-    loan_one = Account.find_by(name: 'Loan One')
-    Balance.create(account: loan_one, amount: (loan_one.current_balance + loan_one.monthly_payment))
-
-    # Loan Two
-    puts 'Updating loan two balance'
-    loan_two = Account.find_by(name: 'Loan Two')
-    annual_interest = (loan_two.current_balance * loan_two.interest_rate)
-    monthly_interest = (annual_interest / 12)
-    Balance.create(account: loan_two, amount: (loan_two.current_balance + loan_two.monthly_payment - monthly_interest ))
+    loan = Account.find_by(name: 'Loan')
+    Balance.create(account: loan, amount: (loan.current_balance + loan.monthly_payment))
 
     # Student loans
     puts 'Updating student loans balance'

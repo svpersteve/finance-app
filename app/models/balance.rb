@@ -1,5 +1,5 @@
 class Balance < ActiveRecord::Base
-  belongs_to :account
+  belongs_to :account, dependent: :destroy
 
   scope :in_date_order, -> { order('created_at ASC') }
 
