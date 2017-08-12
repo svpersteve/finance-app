@@ -1,0 +1,6 @@
+<h1>Balances</h1>
+
+<% @starling_balances.each do |balance| %>
+<%= balance.created_at.to_date.to_formatted_s(:long_ordinal) %>
+<%= balance.amount %>
+<% end %>
