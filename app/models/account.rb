@@ -6,7 +6,13 @@ class Account < ActiveRecord::Base
   scope :property, -> { where(category: 'property').order('position ASC') }
 
   def current_balance
-    balances&.in_date_order.last&.amount || 0
+    if name == 'Starling'
+      request = RestClient.get "https://api.starlingbank.com/api/v1/accounts/balance", { authorization: "Bearer #{ENV['STEVE_TOKEN']}" }
+      balance = ActiveSupport::JSON.decode(request)
+      balance['effectiveBalance']
+    else
+      balances&.in_date_order.last&.amount || 0
+    end
   end
 
   def balance_on(date)
