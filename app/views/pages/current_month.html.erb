@@ -2,13 +2,13 @@
 
 <div class="calendar">
   <% @daily_balances.each_with_index do |balance, index| %>
-    <div class="calendar__square">
+    <div class="calendar__square <%= 'grey' if (index + 1) == Time.now.day %>">
       <div class="calendar__square-title">
         <h2><%= index + 1 %></h2>
       </div>
 
       <div class="calendar__balance">
-        <%= number_to_currency balance, unit: '£', strip_insignificant_zeros: true %>
+        <%= ((index + 1) <= Time.now.day) ? (number_to_currency balance, unit: '£', strip_insignificant_zeros: true) : "<i class='fa fa-clock-o'></i>".html_safe %>
       </div>
     </div>
   <% end %>

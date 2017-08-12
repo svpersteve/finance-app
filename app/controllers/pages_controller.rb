@@ -17,7 +17,7 @@ class PagesController < ApplicationController
   end
 
   def current_month
-    Time.now.day.times do |index|
+    Date.new(@year, @month, -1).day.times do |index|
       day = (index + 1)
       net_worth_today = 0
       @accounts.each do |account|
