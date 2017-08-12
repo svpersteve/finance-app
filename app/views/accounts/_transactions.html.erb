@@ -3,7 +3,7 @@
 
   <div class="balance__accounts">
     <% accounts.each do |account| %>
-      <% unless account.current_balance == 0 %>
+      <% unless account.current_balance == 0.0 %>
         <div class="balance__account">
           <div class="balance__account-name">
             <%= link_to account.name, account %>
