@@ -6,7 +6,7 @@ class Account < ActiveRecord::Base
   scope :property, -> { where(category: 'property').order('position ASC') }
 
   def current_balance
-    balances&.last&.amount || 0
+    balances&.in_date_order.last&.amount || 0
   end
 
   def balance_on(date)

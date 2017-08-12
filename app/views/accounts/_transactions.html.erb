@@ -1,0 +1,28 @@
+<div class="balance">
+  <h2 class="balance__top"><%= category %></h2>
+
+  <div class="balance__accounts">
+    <% accounts.each do |account| %>
+      <div class="balance__account">
+        <div class="balance__account-name">
+          <%= link_to account.name, account %>
+        </div>
+        <div class="balance__account-amount <%= red_or_green(account.current_balance) %>">
+          <%= number_to_currency account.current_balance, unit: '£', strip_insignificant_zeros: true %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <h3 class="balance__bottom">
+    <div class="balance__account">
+      <div class="balance__account-name">
+        <%= category %> total:
+      </div>
+      <% total = total_current_balance(accounts) %>
+      <div class="balance__account-amount <%= red_or_green(total) %>">
+        <%= number_to_currency total, unit: '£', strip_insignificant_zeros: true %>
+      </div>
+    </div>
+  </h3>
+</div>

@@ -1,0 +1,54 @@
+<h1 class='center'><%= @current_month %></h1>
+
+<canvas id="netWorthByMonth"></canvas>
+
+<script>
+  var netWorthByMonthChart = $("#netWorthByMonth");
+
+  var netWorthByMonth = new Chart(netWorthByMonthChart, {
+      type: 'line',
+      data: {
+          labels: gon.days,
+
+          datasets: [{
+              label: '£',
+              data: gon.daily_balances,
+              backgroundColor: ['#0D791C'],
+              borderColor: ['#0D791C'],
+              borderWidth: 1,
+              fill: false,
+          }]
+      },
+      options: {
+        responsive: false,
+        title:{
+            display: false,
+            text:'Net Worth'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Month'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Value'
+                }
+            }]
+        }
+      }
+  });
+</script>

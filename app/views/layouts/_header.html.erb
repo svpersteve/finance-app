@@ -1,0 +1,28 @@
+<div class="navbar">
+  <%= link_to "Steve's Net Worth", root_path, class: 'navbar__item' %>
+
+  <%= link_to accounts_path, class: "navbar__item" do %>
+    <i class="fa fa-money"></i>
+    Accounts
+  <% end %>
+
+  <%= link_to current_month_path, class: "navbar__item" do %>
+    <i class="fa fa-calendar"></i>
+    <%= "#{Time.now.strftime("%B")}" %>
+  <% end %>
+
+  <%= link_to current_year_path, class: "navbar__item" do %>
+    <i class="fa fa-calendar"></i>
+    <%= "#{Time.now.strftime("%Y")}" %>
+  <% end %>
+
+  <%= link_to current_month_graph_path, class: "navbar__item" do %>
+    <i class="fa fa-line-chart"></i>
+    <%= "#{Time.now.strftime("%B")}" %>
+  <% end %>
+
+  <%= link_to current_year_graph_path, class: "navbar__item" do %>
+    <i class="fa fa-line-chart"></i>
+    <%= "#{Time.now.strftime("%Y")}" %>
+  <% end %>
+</div>
