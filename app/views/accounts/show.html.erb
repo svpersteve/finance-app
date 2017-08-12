@@ -1,6 +1,20 @@
-<%= @account.name %>
+<h1 class="center"><%= @account.name %></h1>
 
-<% @account.balances.order('amount DESC').each do |balance| %>
-  <p><%= balance.created_at.to_date.to_formatted_s(:long_ordinal) %></p>
-  <p><%= number_to_currency(balance.amount, unit: '£') %></p>
-<% end %>
+<div class="balances balances--center">
+  <div class="balance">
+    <h2 class="balance__top"><%= @account.name %></h2>
+
+    <div class="balance__accounts">
+      <% @account.balances.in_date_order.each do |balance| %>
+        <div class="balance__account">
+          <div class="balance__account-name">
+            <%= balance.created_at.to_date.to_formatted_s(:long_ordinal) %>
+          </div>
+          <div class="balance__account-amount <%= red_or_green(balance.amount) %>">
+            <%= number_to_currency balance.amount, unit: '£', strip_insignificant_zeros: true %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
