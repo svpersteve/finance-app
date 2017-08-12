@@ -8,4 +8,8 @@ class Account < ActiveRecord::Base
   def current_balance
     balances&.last&.amount || 0
   end
+
+  def balance_on(date)
+    balances&.in_date_order.created_before(date).last&.amount || 0
+  end
 end
