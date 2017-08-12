@@ -13,6 +13,18 @@
  *= require_self
  */
 
+$from-small:'(min-width: 480px)';
+$from-medium:'(min-width: 648px)';
+$from-large:'(min-width: 900px)';
+$from-xlarge:'(min-width: 1280px)';
+$from-xxlarge:'(min-width: 1600px)';
+
+$to-small:'(max-width: 479px)';
+$to-medium:'(max-width: 647px)';
+$to-large:'(max-width: 899px)';
+$to-xlarge:'(max-width: 1279px)';
+$to-xxlarge:'(max-width: 1599px)';
+
 $grey: #CACACA;
 
 .red {
@@ -53,7 +65,19 @@ td {
   align-items: center;
   padding: 10px;
   border: solid 1px black;
-  width: 10%;
+  width: 26%;
+
+  @media #{$from-medium} {
+    width: 10%;
+  }
+}
+
+.calendar__square--large {
+  width: 100%;
+
+  @media #{$from-medium} {
+    width: 18%;
+  }
 }
 
 .grey {
@@ -72,6 +96,11 @@ canvas {
 
 .navbar {
   display: flex;
+  flex-direction: column;
+
+  @media #{$from-medium} {
+    flex-direction: row;
+  }
 }
 
 .navbar__item {
@@ -87,24 +116,34 @@ canvas {
 .jumbo {
   font-size: 50px;
   text-align: center;
-  margin-top: 30vh;
+  margin-top: 20vh;
+
+  @media #{$from-medium} {
+    margin-top: 30vh;
+  }
 }
 
 .balances {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   width: 90%;
   margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 .balance {
   padding: 20px;
-  margin: 0 20px;
+  margin: 0 0 10px;
   border: solid 1px black;
-  width: 30%;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+
+  @media #{$from-medium} {
+    width: 25%;
+  }
 }
 
 .balance__accounts {
