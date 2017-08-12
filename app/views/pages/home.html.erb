@@ -1,1 +1,1 @@
-<h1 class="jumbo"><%= number_to_currency @net_worth, unit: '£', strip_insignificant_zeros: true %></h1>
+<h1 class="jumbo <%= red_or_green(@net_worth) %>"><%= number_to_currency @net_worth, unit: '£', strip_insignificant_zeros: true %></h1>
