@@ -1,3 +1,3 @@
 class Balance < ActiveRecord::Base
-  scope :starling, -> { where(account: 'starling') }
+  belongs_to :account
 end

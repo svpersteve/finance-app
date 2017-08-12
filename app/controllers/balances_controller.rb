@@ -1,5 +1,5 @@
 class BalancesController < ApplicationController
   def index
-    @starling_balances = Balance.starling.all
+    @balances = Balance.all
   end
 end
